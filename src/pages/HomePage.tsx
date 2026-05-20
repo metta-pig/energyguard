@@ -2,105 +2,96 @@ import type { ReactNode } from "react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Container, Section } from "../components/ui";
+import { aboutPillars, components, heroSlides, proofLogos, testimonial } from "../lib/energyGuardContent";
 import {
-  HomeAppShellSection,
-  HomeChangelogSection,
-  HomeDocsHubSection,
-  HomeNewsroomSection,
-  HomePricingSection,
-} from "./home/extendedPlaceholders";
-import { getLayoutPresetId, HOME_SECTION_ORDER, type HomeSectionKey, type LayoutPresetId } from "../lib/layoutPresets";
+  getLayoutPresetId,
+  HOME_SECTION_ORDER,
+  type HomeSectionKey,
+  type LayoutPresetId,
+} from "../lib/layoutPresets";
 import { siteConfig } from "../lib/siteConfig";
-import { stockImagery, supplementalPhotoCredit } from "../lib/siteMedia";
+import { brandImagery, supplementalPhotoCredit } from "../lib/siteMedia";
 
-const railItems = ["Strategy", "Experience", "Performance", "Ship-ready", "Your city"] as const;
+const railItems = ["Fuel savings", "EPA / CARB", "Made in USA", "Lifetime warranty", "No moving parts"] as const;
 
 const categoryTiles = [
   {
-    to: "/services",
-    title: "What we do",
-    body: "Programs, retainers, and workshops—replace with your real service lanes.",
-    src: stockImagery.habitatTerrarium,
-    variant: "default" as const,
+    to: "/solutions",
+    title: "Solutions",
+    body: "Full kits and components—skirts, fairings, mud flaps, and wheel covers.",
+    src: brandImagery.solutionsMax,
     gridClass: "show-bento__tile--inv",
   },
   {
-    to: "/about",
-    title: "Who we are",
-    body: "Team story, proof points, and the standards clients should expect.",
-    src: stockImagery.redEyedTreeFrog,
-    variant: "default" as const,
+    to: "/warranty",
+    title: "EverGuard™",
+    body: "Industry-only written lifetime warranty in trailer aerodynamics.",
+    src: brandImagery.heroEverGuard,
     gridClass: "show-bento__tile--amp",
   },
   {
-    to: "/shop",
-    title: "Offerings",
-    body: "Productized packages or a hand-off to your existing commerce stack.",
-    src: stockImagery.snakeScalesMacro,
-    variant: "default" as const,
+    to: "/about",
+    title: "About",
+    body: "How Energy Guard lowers cost per mile for fleets nationwide.",
+    src: brandImagery.aboutStory,
     gridClass: "show-bento__tile--sna",
   },
   {
     to: "/contact",
-    title: "Let’s talk",
-    body: "Book a walkthrough, request a quote, or plan an on-site visit.",
-    src: stockImagery.geckoLizard,
+    title: "Request estimate",
+    body: "Talk with sales about kits, ROI, and fleet programs.",
+    src: brandImagery.salesSheet,
     variant: "contain" as const,
     gridClass: "show-bento__tile--liz",
   },
 ] as const;
 
+function getHomeSectionOrder(layoutId: LayoutPresetId): readonly HomeSectionKey[] {
+  if (layoutId === "local") {
+    return ["hero", "proof", "visit", "splitIntro", "bento", "quote"];
+  }
+  return HOME_SECTION_ORDER[layoutId];
+}
+
 function HomeHero(): ReactNode {
+  const slide = heroSlides[0];
+  const heroImage = brandImagery[slide.image];
+
   return (
     <header className="hero-cinema">
       <div className="hero-cinema__bg" aria-hidden>
         <img
-          alt="Macro wildlife photograph suitable for a cinematic hero"
+          alt="EverGuard trailer aerodynamics lifetime warranty"
           className="hero-cinema__photo"
           decoding="async"
           fetchPriority="high"
-          height={1600}
+          height={900}
           loading="eager"
-          src={stockImagery.heroChameleon}
-          width={2400}
+          src={heroImage}
+          width={1600}
         />
         <div className="hero-cinema__scrim" />
         <div className="hero-cinema__vignette" />
       </div>
-
       <Container className="hero-cinema__content">
-        <p className="hero-cinema__kicker">{siteConfig.tagline}</p>
+        <p className="hero-cinema__kicker">{slide.kicker}</p>
         <h1 className="hero-cinema__title">
-          <span className="hero-cinema__title-line">Bold story.</span>{" "}
-          <span className="hero-cinema__title-line hero-cinema__title-line--accent">Sharp delivery.</span>
+          <span className="hero-cinema__title-line">{slide.title}</span>
         </h1>
-        <p className="hero-cinema__lede">
-          This home page demonstrates the default marketing shell: cinematic hero, split bands, bento navigation, and
-          glass quote panels—swap every line during <code>@site-revamp</code> while keeping the layout system.
-        </p>
+        <p className="hero-cinema__lede">{siteConfig.tagline}</p>
         <div className="hero-cinema__actions">
           <Link className="ui-button ui-button--primary" to="/contact">
-            Book a walkthrough
+            Request estimate
           </Link>
-          <a className="ui-button ui-button--secondary" href="#visit">
-            Plan a visit
+          <a className="ui-button ui-button--secondary" href={siteConfig.contact.emailMailto}>
+            Email sales
           </a>
-          <Link className="ui-button ui-button--ghost" to="/about">
-            Why us
+          <Link className="ui-button ui-button--ghost" to={slide.ctaHref}>
+            {slide.ctaLabel}
           </Link>
         </div>
-        <p className="hero-cinema__note">
-          Hook your CMS, booking tool, or storefront URL in <code>src/lib/siteConfig.ts</code> when the client stack is
-          known.
-        </p>
-        <p className="hero-cinema__credit">
-          {supplementalPhotoCredit}{" "}
-          <a href="https://unsplash.com/?utm_source=site-revamp-template&utm_medium=referral" rel="noopener noreferrer" target="_blank">
-            Unsplash
-          </a>
-        </p>
+        <p className="hero-cinema__credit">{supplementalPhotoCredit}</p>
       </Container>
-
       <Container>
         <ul className="show-rail">
           {railItems.map((label) => (
@@ -114,36 +105,43 @@ function HomeHero(): ReactNode {
   );
 }
 
-function HomeSplitIntro({ layoutId }: { layoutId: LayoutPresetId }): ReactNode {
-  const reverse = layoutId === "design-forward";
+function HomeSplitIntro(): ReactNode {
   return (
     <Section surface>
       <Container>
-        <div className={`show-split${reverse ? " show-split--reverse" : ""}`.trim()}>
+        <div className="show-split">
           <div>
-            <p className="page-eyebrow">Systems thinking</p>
-            <h2 className="page-section-title show-heading">Design the narrative like a product—not a brochure.</h2>
+            <p className="page-eyebrow">About Energy Guard</p>
+            <h2 className="page-section-title show-heading">Solutions that fit every need</h2>
             <p className="page-prose">
-              Messaging, proof, and conversion paths should reinforce each other. Use this band for your flagship
-              story, then route visitors to the routes that match their intent.
+              Energy Guard Aerodynamic Solutions are designed to lower your cost per mile and total cost of ownership
+              by maximizing airflow control—while reducing greenhouse gas emissions. No moving parts, proven
+              performance, and kits matched to your operation.
             </p>
+            <ul className="page-list">
+              {aboutPillars.map((pillar) => (
+                <li key={pillar.title}>
+                  <strong>{pillar.title}.</strong> {pillar.body}
+                </li>
+              ))}
+            </ul>
             <div className="page-actions">
-              <Link className="ui-button ui-button--primary" to="/shop">
-                Explore offers
+              <Link className="ui-button ui-button--primary" to="/solutions">
+                Explore solutions
               </Link>
-              <Link className="ui-button ui-button--ghost" to="/services">
-                Capabilities
-              </Link>
+              <a className="ui-button ui-button--ghost" href={brandImagery.salesSheet} rel="noopener noreferrer" target="_blank">
+                Sales sheet
+              </a>
             </div>
           </div>
           <figure className="show-split__visual">
-            <span className="show-split__badge">Editorial-ready</span>
+            <span className="show-split__badge">Made in USA</span>
             <img
-              alt="Lush planted terrarium with glass panels"
+              alt="Energy Guard trailer skirt rendering"
               decoding="async"
               height={1200}
               loading="lazy"
-              src={stockImagery.habitatTerrarium}
+              src={brandImagery.solutionsSkirt}
               width={1600}
             />
           </figure>
@@ -157,18 +155,17 @@ function HomeBento(): ReactNode {
   return (
     <Section>
       <Container>
-        <p className="page-eyebrow">Collections</p>
-        <h2 className="page-section-title show-heading">Route visitors with intention.</h2>
+        <p className="page-eyebrow">Explore</p>
+        <h2 className="page-section-title show-heading">Built for drivers, fleets, and partners</h2>
         <p className="page-prose show-bento-intro">
-          Each tile can deep-link to a SPA route or an external system. Update labels, imagery, and destinations per
-          client during the revamp workflow.
+          Route by role—spec kits for operations, register EverGuard coverage, or connect with sales for a custom
+          estimate.
         </p>
-
         <div className="show-bento">
           {categoryTiles.map((tile) => (
             <Link
               key={tile.title}
-              className={`show-tile${tile.variant === "contain" ? " show-tile--contain" : ""} ${tile.gridClass}`}
+              className={`show-tile${"variant" in tile && tile.variant === "contain" ? " show-tile--contain" : ""} ${tile.gridClass}`}
               to={tile.to}
             >
               <img alt="" className="show-tile__img" decoding="async" loading="lazy" src={tile.src} />
@@ -180,95 +177,49 @@ function HomeBento(): ReactNode {
             </Link>
           ))}
         </div>
+        <p className="page-eyebrow page-eyebrow--spaced">Components</p>
+        <ul className="page-list">
+          {components.slice(0, 3).map((c) => (
+            <li key={c.title}>{c.title}</li>
+          ))}
+        </ul>
+        <Link className="ui-button ui-button--ghost" to="/solutions">
+          All components
+        </Link>
       </Container>
     </Section>
   );
 }
 
-function HomeVisit({ layoutId }: { layoutId: LayoutPresetId }): ReactNode {
-  const mode = layoutId === "event-forward" ? "event" : layoutId === "local" ? "local" : "default";
-
-  const eyebrow = mode === "event" ? "When & where" : mode === "local" ? "Location & hours" : "Visit";
-
-  const primaryMapLabel = mode === "event" ? "Venue map" : mode === "local" ? "Directions" : "Open in Maps";
-
+function HomeVisit(): ReactNode {
   return (
     <div className="show-visit" id="visit">
       <div className="show-visit__bg" aria-hidden>
-        <img alt="" decoding="async" loading="lazy" src={stockImagery.visitBackdrop} />
+        <img alt="" decoding="async" loading="lazy" src={brandImagery.visitBackdrop} />
       </div>
       <div className="show-visit__wash" aria-hidden />
       <Section className="show-visit__inner" surface={false}>
         <Container>
-          <p className="page-eyebrow">{eyebrow}</p>
-          <h2 className="page-section-title">{siteConfig.address.lines.join(" · ")}</h2>
+          <p className="page-eyebrow">Get started</p>
+          <h2 className="page-section-title">Ready to upgrade your fleet?</h2>
           <p className="page-prose">
-            {mode === "event" ? (
-              <>
-                Swap for schedule blocks, timezone, venue accessibility, and registration CTAs. Map link still pulls from{" "}
-                <code>siteConfig.address</code>.
-              </>
-            ) : mode === "local" ? (
-              <>
-                Use for service area, parking, accessibility, holiday hours, and click-to-call. Map link pulls from{" "}
-                <code>siteConfig.address</code>.
-              </>
-            ) : (
-              <>
-                Drop in showroom copy, hours, and parking notes here. The map link pulls from <code>siteConfig.address</code>.
-              </>
-            )}
+            Already know what you need? Contact sales for product information, fleet programs, or to place an order. Not
+            sure which solution fits? We&apos;ll help you decide.
           </p>
           <div className="page-actions">
-            <a className="ui-button ui-button--primary" href={siteConfig.address.mapsUrl} rel="noopener noreferrer" target="_blank">
-              {primaryMapLabel}
-            </a>
-            {mode === "event" ? (
-              <Link className="ui-button ui-button--secondary" to="/contact">
-                Tickets / RSVP
-              </Link>
-            ) : null}
-            <Link
-              className={`ui-button${mode === "event" ? " ui-button--ghost" : " ui-button--secondary"}`}
-              to="/contact"
-            >
-              {mode === "local" ? "Book or call" : "Contact"}
+            <Link className="ui-button ui-button--primary" to="/contact">
+              Request estimate
             </Link>
+            <a className="ui-button ui-button--secondary" href={siteConfig.contact.emailMailto}>
+              {siteConfig.contact.email}
+            </a>
+            <a className="ui-button ui-button--ghost" href={brandImagery.salesSheet} rel="noopener noreferrer" target="_blank">
+              Download sales sheet
+            </a>
           </div>
         </Container>
       </Section>
     </div>
-  );
-}
-
-const statsPlaceholders = [
-  { hint: "Wire real telemetry or finance figures during @site-revamp.", label: "Uptime / SLA", value: "99.98%" },
-  { hint: "Replace with customers, seats, or ARR depending on the brief.", label: "Active accounts", value: "12.4k" },
-  { hint: "Latency, satisfaction (NPS), or conversion lift.", label: "Median response", value: "142ms" },
-  { hint: "Use for YoY growth, funding, or impact totals.", label: "YoY growth", value: "+38%" },
-] as const;
-
-function HomeStatsBand(): ReactNode {
-  return (
-    <Section className="stats-strip" surface>
-      <Container>
-        <p className="page-eyebrow">Proof by numbers</p>
-        <h2 className="page-section-title show-heading">Lead with metrics your buyers already care about.</h2>
-        <p className="page-prose stats-strip__intro">
-          This band exists for <strong>data-forward</strong> and <strong>launch</strong> layouts—swap labels and values
-          from CMS, warehouse, or BI exports.
-        </p>
-        <ul className="stats-strip__grid">
-          {statsPlaceholders.map((s) => (
-            <li key={s.label} className="stats-strip__card">
-              <p className="stats-strip__value">{s.value}</p>
-              <p className="stats-strip__label">{s.label}</p>
-              <p className="stats-strip__hint">{s.hint}</p>
-            </li>
-          ))}
-        </ul>
-      </Container>
-    </Section>
   );
 }
 
@@ -278,19 +229,16 @@ function HomeQuote(): ReactNode {
       <Container>
         <div className="show-split">
           <blockquote className="show-quote">
-            <p className="show-quote__text">
-              “Replace this pull-quote with a vetted testimonial once legal approves the language—keep the glass card
-              treatment for instant polish.”
-            </p>
-            <footer className="show-quote__cite">Voiceover placeholder</footer>
+            <p className="show-quote__text">&ldquo;{testimonial.quote}&rdquo;</p>
+            <footer className="show-quote__cite">{testimonial.cite}</footer>
           </blockquote>
           <figure className="show-split__visual show-split__visual--portrait">
             <img
-              alt="Gecko perched on wood"
+              alt="Daryl Bear, MVT Solutions"
               decoding="async"
               height={1600}
               loading="lazy"
-              src={stockImagery.geckoLizard}
+              src={brandImagery.testimonialPortrait}
               width={1200}
             />
           </figure>
@@ -304,64 +252,53 @@ function HomeProof(): ReactNode {
   return (
     <Section className="home-proof">
       <Container>
-        <div className="home-proof__logos" aria-label="Placeholder partner logos">
-          {["Northwind", "Contoso", "Fabrikam", "Litware"].map((name) => (
+        <div className="home-proof__logos" aria-label="Partners and certifications">
+          {proofLogos.map((name) => (
             <span key={name} className="home-proof__logo-chip">
               {name}
             </span>
           ))}
         </div>
-        <h2 className="page-section-title show-heading">Social proof layer</h2>
+        <h2 className="page-section-title show-heading">Trusted by fleets and partners</h2>
         <p className="page-prose">
-          Embed reviews, logos, or press mentions when you have rights. Until then, this section explains where those
-          modules will live without blocking launch.
+          Recognized for innovation and environmental performance—transparent testing, US manufacturing, and programs
+          built for truck drivers, manufacturers, and sales teams.
         </p>
+        <Link className="ui-button ui-button--ghost" to="/info">
+          Why Energy Guard
+        </Link>
       </Container>
     </Section>
   );
 }
 
-function renderHomeSection(key: HomeSectionKey, layoutId: LayoutPresetId): ReactNode {
+function renderHomeSection(key: HomeSectionKey): ReactNode {
   switch (key) {
     case "hero":
       return <HomeHero />;
     case "splitIntro":
-      return <HomeSplitIntro layoutId={layoutId} />;
+      return <HomeSplitIntro />;
     case "bento":
       return <HomeBento />;
     case "visit":
-      return <HomeVisit layoutId={layoutId} />;
-    case "stats":
-      return <HomeStatsBand />;
+      return <HomeVisit />;
     case "quote":
       return <HomeQuote />;
     case "proof":
       return <HomeProof />;
-    case "pricing":
-      return <HomePricingSection />;
-    case "newsroom":
-      return <HomeNewsroomSection />;
-    case "docsHub":
-      return <HomeDocsHubSection />;
-    case "changelog":
-      return <HomeChangelogSection />;
-    case "appShell":
-      return <HomeAppShellSection />;
-    default: {
-      const _exhaustive: never = key;
-      return _exhaustive;
-    }
+    default:
+      return null;
   }
 }
 
 export function HomePage() {
   const layoutId = getLayoutPresetId();
-  const order = HOME_SECTION_ORDER[layoutId];
+  const order = getHomeSectionOrder(layoutId);
 
   return (
     <>
       {order.map((key) => (
-        <Fragment key={key}>{renderHomeSection(key, layoutId)}</Fragment>
+        <Fragment key={key}>{renderHomeSection(key)}</Fragment>
       ))}
     </>
   );

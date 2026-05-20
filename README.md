@@ -9,14 +9,15 @@ Team template for **rebuilding legacy marketing sites** in React (Vite) with **s
 
 This README is the **web** template. Native work uses the same skill **files** (see below) but a **different** git root in Cursor.
 
-## Project
+## Project — Energy Guard
 
-The app is a **client-neutral marketing shell**: placeholder copy in `src/lib/siteConfig.ts`, demo **Unsplash** imagery in `src/lib/siteMedia.ts`, and defaults **`showcase`** (theme) + **`balanced`** (home structure) when env vars are unset. **Pick a different theme per client** via `VITE_SITE_THEME`, and a **structural preset** via **`VITE_LAYOUT_PRESET`** (see **`src/lib/layoutPresets.ts`** for the full list, including `pricing`, `newsroom`, `docs`, `changelog`, and `app-shell`) so each spin-off differs in both **palette** and **page architecture**—see also **`src/lib/themePresets.ts`**. Inner pages use **`PageMast`** plus shared CSS (`sitePages.css`, `homeShowcase.css`, and `layoutPresets.css` imported from `src/App.tsx`).
+Marketing site for [Energy Guard™](https://energyguard.com/) trailer aerodynamic solutions. **Theme:** `modern` · **Layout:** `local` (home: hero → trust → contact → story → routes → testimonial).
 
-Example routes: Home, About, Services, Feeder menu (rename or remove per client), Shop overview, Contact.
+Routes: `/`, `/about`, `/solutions`, `/warranty`, `/info`, `/news`, `/contact`.
 
-- **Brand assets:** add files under `public/brand/` (see `public/brand/README.md`) and set `siteConfig.logoUrl` when a logo ships.
-- **Deploy:** static build via `npm run build` → `dist/`; configure the host for SPA fallback on all app routes.
+- **Config:** `src/lib/siteConfig.ts`, content helpers in `src/lib/energyGuardContent.ts`, imagery in `src/lib/siteMedia.ts`.
+- **Handoff docs:** `SITE_MAP.md`, `THEME.md`, `CHECKLIST.md`, `ASSUMPTIONS.md`.
+- **Deploy:** `npm run build` → `dist/`; SPA fallback on all routes; 301s per `SITE_MAP.md`.
 
 ## Quick start
 

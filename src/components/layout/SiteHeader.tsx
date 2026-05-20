@@ -6,10 +6,10 @@ import "./layout.css";
 
 const nav = [
   { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
-  { to: "/feeder-menu", label: "Feeder menu" },
-  { to: "/shop", label: "Shop" },
-  { to: "/contact", label: "Contact" },
+  { to: "/solutions", label: "Solutions" },
+  { to: "/warranty", label: "Warranty" },
+  { to: "/info", label: "Info" },
+  { to: "/news", label: "News" },
 ] as const;
 
 function HeaderCta() {
@@ -51,9 +51,6 @@ export function SiteHeader() {
           )}
         </Link>
         <nav aria-label="Primary" className="site-header__nav">
-          <NavLink end className={({ isActive }) => `site-header__link${isActive ? " site-header__link--active" : ""}`} to="/">
-            Home
-          </NavLink>
           {nav.map((item) => (
             <NavLink
               key={item.to}
@@ -65,16 +62,9 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="site-header__ctas">
-          {siteConfig.storeUrl ? (
-            <a
-              className="ui-button ui-button--secondary site-header__cta site-header__cta--store"
-              href={siteConfig.storeUrl}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Store
-            </a>
-          ) : null}
+          <a className="ui-button ui-button--secondary site-header__cta" href={siteConfig.contact.emailMailto}>
+            Email sales
+          </a>
           <HeaderCta />
         </div>
       </Container>

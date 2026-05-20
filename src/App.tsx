@@ -3,10 +3,11 @@ import { SiteFooter } from "./components/layout/SiteFooter";
 import { SiteHeader } from "./components/layout/SiteHeader";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
-import { FeederMenuPage } from "./pages/FeederMenuPage";
 import { HomePage } from "./pages/HomePage";
-import { ServicesPage } from "./pages/ServicesPage";
-import { ShopPage } from "./pages/ShopPage";
+import { InfoPage } from "./pages/InfoPage";
+import { NewsPage } from "./pages/NewsPage";
+import { SolutionsPage } from "./pages/SolutionsPage";
+import { WarrantyPage } from "./pages/WarrantyPage";
 import "./components/ui/ui.css";
 import "./pages/sitePages.css";
 import "./pages/homeShowcase.css";
@@ -20,9 +21,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/feeder-menu" element={<FeederMenuPage />} />
-          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/solutions" element={<SolutionsPage />} />
+          <Route path="/warranty" element={<WarrantyPage />} />
+          <Route path="/info" element={<InfoPage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>

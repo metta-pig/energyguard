@@ -1,48 +1,32 @@
-# Theme — showcase (spin-off baseline)
+# Theme — Energy Guard
 
-## Choosing a preset (so each site looks different)
+## Presets
 
-This file documents **one** active theme for the project. **Before implementation**, pick a personality id from **`src/lib/themePresets.ts`** (`modern`, `classic`, `sports`, `retro`, `shop`, `info`, `showcase`, …) and set `VITE_SITE_THEME` accordingly. State the id in `revamp-input/theme-preset.txt` or the user prompt (`Theme preset: retro`).
+| Setting | Value | Rationale |
+|---------|-------|-----------|
+| `VITE_SITE_THEME` | `modern` | Cool neutrals, geometric sans—fits industrial B2B without the template’s dark showcase default. |
+| `VITE_LAYOUT_PRESET` | `local` | Service/geo business flow; home order customized to **hero → proof (trust) → visit (contact) → story → bento → quote**. |
 
-**Structural layout (home page):** independently set **`VITE_LAYOUT_PRESET`** using ids from **`src/lib/layoutPresets.ts`** (`balanced`, `image-forward`, `text-forward`, `design-forward`, `story`, `commerce`, `event-forward`, `data-forward`, `academy`, `community`, `launch`, `minimal`, `local`, `nonprofit`, `lead-gen`, `trust`, `pricing`, `newsroom`, `docs`, `changelog`, `app-shell`) or `revamp-input/layout-preset.txt`. This controls section **order** on the home page (including optional **`stats`**, **`pricing`**, **`newsroom`**, **`docsHub`**, **`changelog`**, **`appShell`** bands) and CSS “wow” weighting in `src/pages/layoutPresets.css` without forking the whole template.
+## Typography
 
-## Related skills (web + native)
+- **Display / UI:** Space Grotesk  
+- **Body:** DM Sans  
+- Loaded in `index.html` (subset vs full template font bundle).
 
-- **This repository** is the **marketing web** deliverable. Theme decisions here belong in this `THEME.md` and in `src/themes/*.css` / `VITE_SITE_THEME`.
-- If the same client needs a **native iOS/Android app** (store binaries, not responsive web), use **`@native-app-revamp`** in the **mobile app** Cursor workspace. Keep **palette, type scale, radii, and motion intent** aligned with the mobile repo’s `THEME.md` so brand handoff stays consistent.
-- Companion reference: `.cursor/skills/native-app-revamp/SKILL.md` and `APP_FLOW.example.md` in that folder (navigation doc for the app).
+## Imagery
 
-## Theme id
+- Product and hero assets hotlink `energyguard.com` uploads via `src/lib/siteMedia.ts` until files land in `public/brand/` from `revamp-input/brand/`.
+- Logo: `public/brand/logo.webp` (from legacy `EG_Color_TM@2000x.webp`).
 
-- **File:** `src/themes/showcase.css` (+ shared layout tokens in `src/themes/showcase-tokens.css`)
-- **Class:** `.theme-showcase`
-- **Env:** `VITE_SITE_THEME=showcase` (see `.env.example`). If the variable is omitted locally, `applyThemeFromEnv()` still defaults to **`showcase`** so new clones match this baseline.
+## Conversion
 
-## Direction
+- **Primary CTA:** Request estimate → `/contact`
+- **Secondary:** Email sales (`sales@energyguard.com`), EverGuard warranty, sales sheet PDF (legacy upload URL).
 
-- **Palette:** deep forest page background, lifted surface panels, muted sage supporting text, warm gold primary for CTAs and highlights.
-- **Chrome:** near-black header so a light logo or wordmark reads clearly; gold hairline accent, pill nav, scroll-tightened bar. Footer uses a deeper slab with a gold top accent. Dedicated tokens: `--color-header-*`, `--color-footer-*`, `--rail-*`, `--color-page-mast-*`.
-- **Typography:** `Oswald` for display headings, `Source Sans 3` for body (Google Fonts in `index.html`). Swap faces in `index.html` and theme `--font-*` tokens when the client supplies a licensed kit.
-- **Imagery:** demo pages use **Unsplash** URLs in `src/lib/siteMedia.ts`. Replace with assets under `public/brand/` during a client revamp and update `siteMedia` / page `alt` text accordingly.
+## Motion
 
-## Layout baseline (carry forward on new sites)
+- Uses existing hero / tile transitions; respects `prefers-reduced-motion` in shared CSS.
 
-- **`PageMast`** (`src/components/layout/PageMast.tsx`) for inner-page heroes: eyebrow, title, lede, optional image, primary actions.
-- **Global page chrome:** `src/pages/sitePages.css` (section rhythm, `show-split`, `show-quote`, `info-card`, mast utilities) and `src/pages/homeShowcase.css` (home hero, bento, visit band). Both are imported from `src/App.tsx` so every route shares the same visual language.
-- **Config:** `src/lib/siteConfig.ts` (name, tagline, optional `logoUrl` / `storeUrl`, header CTA, contact, address) and `src/lib/siteMedia.ts` (imagery). Keep marketing facts in config, not scattered in JSX.
+## Native app
 
-## Token overrides (summary)
-
-Colors and radii live on `.theme-showcase` using the same variable names as `default.css` so primitives stay theme-agnostic.
-
-| Token | Role |
-|-------|------|
-| `--color-bg` / `--color-surface` | Page + panel backgrounds |
-| `--color-text` / `--color-text-muted` | Primary + supporting copy |
-| `--color-primary` | Buttons, emphasis |
-| `--color-link` | Inline links |
-| `--color-focus` | `:focus-visible` outline |
-
-## Client fork
-
-Copy `showcase.css` to `src/themes/<client>.css`, rename the root class to `.theme-<client>`, register the id in `src/lib/applyTheme.ts`, import from `src/index.css`, and set `VITE_SITE_THEME=<client>` in `.env` / hosting.
+Out of scope — marketing web SPA only.

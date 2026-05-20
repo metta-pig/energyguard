@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Container, Section } from "../components/ui";
 import { PageMast } from "../components/layout/PageMast";
-import { siteConfig } from "../lib/siteConfig";
-import { stockImagery } from "../lib/siteMedia";
+import { aboutPillars } from "../lib/energyGuardContent";
+import { brandImagery } from "../lib/siteMedia";
 
 export function AboutPage() {
   return (
@@ -10,59 +10,51 @@ export function AboutPage() {
       <PageMast
         actions={
           <>
-            <Link className="ui-button ui-button--primary" to="/services">
-              Services we offer
+            <Link className="ui-button ui-button--primary" to="/contact">
+              Request estimate
             </Link>
-            <Link className="ui-button ui-button--ghost" to="/contact">
-              Visit or reach out
+            <Link className="ui-button ui-button--ghost" to="/solutions">
+              View solutions
             </Link>
           </>
         }
         eyebrow="About"
-        image={{ alt: "Macro photograph of wildlife on natural substrate", src: stockImagery.tarantula }}
+        image={{ alt: "Semi truck on the highway", src: brandImagery.aboutStory }}
         lede={
-          <>
-            <p>
-              Replace this mast copy with the client&apos;s founding story, certifications, and what makes their team
-              different. Keep the layout—swap only the narrative and photography paths in <code>siteMedia</code> or{" "}
-              <code>public/brand</code>.
-            </p>
-            <p>
-              The second paragraph is ideal for proof: years in business, notable customers, or process guarantees. The
-              revamp skill maps legacy “About” pages into this structure automatically.
-            </p>
-          </>
+          <p>
+            Energy Guard Aerodynamic Solutions lower cost per mile and total cost of ownership by maximizing airflow
+            control—while reducing greenhouse gas emissions—with no moving parts and proven performance.
+          </p>
         }
-        title="Built by practitioners, for clients"
+        title="Solutions that fit every fleet need"
       />
 
       <Section surface>
         <Container>
           <div className="show-split">
             <div>
-              <p className="page-eyebrow">Standards</p>
-              <h2 className="page-section-title show-heading">How decisions get made</h2>
+              <p className="page-eyebrow">Our approach</p>
+              <h2 className="page-section-title show-heading">End-to-end aerodynamics for real fleets</h2>
               <p className="page-prose">
-                Use this column for operating principles: how you scope work, communicate risk, or onboard new clients.
-                Pair it with a strong visual to keep the page feeling premium without extra components.
+                Whether you operate regional lanes or national programs, Energy Guard gives you kits that match how
+                your trailers run—backed by transparent testing and US manufacturing.
               </p>
-              <div className="page-actions">
-                <Link className="ui-button ui-button--secondary" to="/services">
-                  Services
-                </Link>
-                <Link className="ui-button ui-button--ghost" to="/contact">
-                  Contact
-                </Link>
-              </div>
+              <ul className="page-list">
+                {aboutPillars.map((pillar) => (
+                  <li key={pillar.title}>
+                    <strong>{pillar.title}.</strong> {pillar.body}
+                  </li>
+                ))}
+              </ul>
             </div>
             <figure className="show-split__visual">
               <img
-                alt="Macro detail of scales in warm light"
+                alt="Energy Guard aerodynamic components"
                 decoding="async"
-                height={1200}
+                height={900}
                 loading="lazy"
-                src={stockImagery.snakeScalesMacro}
-                width={900}
+                src={brandImagery.solutionsSkirt}
+                width={1200}
               />
             </figure>
           </div>
@@ -71,27 +63,12 @@ export function AboutPage() {
 
       <Section>
         <Container>
-          <blockquote className="show-quote">
-            <p className="show-quote__text">
-              Lead with a crisp value statement—swap this line with a client-approved quote once legal signs off.
-            </p>
-            <footer className="show-quote__cite">Placeholder · replace with approved quote</footer>
-          </blockquote>
-        </Container>
-      </Section>
-
-      <Section surface>
-        <Container>
-          <h2 className="page-section-title show-heading">Visit in person</h2>
-          <p className="page-prose">
-            <strong>{siteConfig.name}</strong> · {siteConfig.address.lines.join(", ")}
-          </p>
           <div className="page-actions">
-            <a className="ui-button ui-button--primary" href={siteConfig.address.mapsUrl} rel="noopener noreferrer" target="_blank">
-              Open in Maps
-            </a>
-            <Link className="ui-button ui-button--ghost" to="/contact">
-              Call the desk
+            <Link className="ui-button ui-button--primary" to="/solutions">
+              Explore solutions
+            </Link>
+            <Link className="ui-button ui-button--secondary" to="/info">
+              Why Energy Guard
             </Link>
           </div>
         </Container>

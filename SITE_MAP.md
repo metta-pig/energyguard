@@ -1,21 +1,25 @@
-# Site map — template (example IA)
+# Site map — Energy Guard
 
-This repository ships a **neutral marketing shell** with routes you can rename or drop per client. After `@site-revamp`, replace the table below with **legacy URL → new route** rows for the specific site.
+Legacy source: [energyguard.com](https://energyguard.com/) (WordPress single-page + subpages).
 
-| Legacy / source URL | New route | Notes |
-|---------------------|-----------|-------|
-| _(brief TBD)_ | `/` | Home — hero + showcase bands (`HomePage`). |
-| _(brief TBD)_ | `/about` | Story / team — `PageMast` + split + quote pattern. |
-| _(brief TBD)_ | `/services` | Offerings grid — adjust copy and cards. |
-| _(brief TBD)_ | `/feeder-menu` | Example long-form list page — rename route if irrelevant. |
-| _(brief TBD)_ | `/shop` | Department / merchandising overview; wire `siteConfig.storeUrl` for external checkout. |
-| _(brief TBD)_ | `/contact` | Contact + map link from `siteConfig`. |
+| Legacy URL | New route | Notes |
+|------------|-----------|-------|
+| `https://energyguard.com/` | `/` | Home — EverGuard hero, trust, contact band, solutions story, bento routes, testimonial. |
+| `https://energyguard.com/#about` | `/about` | Company story and pillars (was home anchor). |
+| `https://energyguard.com/energy-guard-aerodynamic-solutions/` | `/solutions` | Kits and components. |
+| `https://energyguard.com/warranty/` | `/warranty` | EverGuard™ lifetime warranty. |
+| `https://energyguard.com/#faq` | `/info` | Durability, fuel savings, ROI, testing, Made in USA. |
+| `https://energyguard.com/news/` | `/news` | Newsroom (seeded with EverGuard launch). |
+| `https://energyguard.com/#contact` | `/contact` | Estimate request + sales/support email. |
 
 ## Redirect guidance
 
-When the SPA is served at the apex domain:
+When deploying the SPA at the apex domain:
 
-- Configure the host to **SPA-fallback** all app paths to `index.html`.
-- Document any paths that must continue to hit a **legacy CMS**, **store**, or **API** so edge rules can proxy or subdomain them.
-
-Update this file whenever routes or commerce integration change.
+- SPA fallback: serve `index.html` for all routes above.
+- Redirect legacy paths to new routes (301):
+  - `/energy-guard-aerodynamic-solutions/` → `/solutions`
+  - `/warranty/` → `/warranty` (same path)
+  - `/news/` → `/news`
+  - `/#about`, `/#faq`, `/#contact` → `/about`, `/info`, `/contact`
+- Keep WordPress admin or form endpoints on separate host if still required during transition.

@@ -1,34 +1,38 @@
 /**
- * Client-neutral marketing config. Replace during @site-revamp (or hand-edit before first deploy).
- * Optional `logoUrl`: path under `public/` (e.g. `/brand/logo.svg`). `null` = text wordmark in header/footer.
+ * Energy Guard marketing site configuration.
  */
 export const siteConfig = {
-  name: "Your organization",
-  tagline: "Replace this line with your positioning during @site-revamp.",
-  logoUrl: null as string | null,
+  name: "Energy Guard",
+  tagline: "Trailer aerodynamic solutions that cut drag, fuel spend, and downtime.",
+  logoUrl: "/brand/logo.webp" as string | null,
 
-  /** Optional legacy / headless commerce URL for header + footer “Store” link; null hides those links. */
   storeUrl: null as string | null,
 
-  /** Primary header CTA — use `/contact`, `/shop`, or an absolute URL. */
   headerCta: {
-    label: "Contact",
+    label: "Request estimate",
     href: "/contact",
   } as const,
 
   social: {
     facebook: null as string | null,
     instagram: null as string | null,
+    youtube: "https://www.youtube.com/@EnergyGuard" as string | null,
   },
   contact: {
-    phoneDisplay: "(555) 010-0100",
-    phoneTel: "tel:+15550100100",
-    email: "hello@example.com",
-    emailMailto: "mailto:hello@example.com",
+    phoneDisplay: null as string | null,
+    phoneTel: null as string | null,
+    email: "sales@energyguard.com",
+    emailMailto: "mailto:sales@energyguard.com",
+    supportEmail: "support@energyguard.com",
+    supportMailto: "mailto:support@energyguard.com",
   },
   address: {
-    lines: ["123 Example Street", "Your City, ST 00000"],
-    mapsUrl: "https://www.openstreetmap.org/search?query=Your%20City",
+    lines: ["United States — fleet programs nationwide"],
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Energy+Guard+aerodynamic+solutions",
+  },
+  legal: {
+    privacyUrl: "https://energyguard.com/privacy-policy/",
+    termsUrl: "https://energyguard.com/terms-of-service/",
   },
 } as const;
 
