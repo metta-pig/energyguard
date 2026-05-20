@@ -42,9 +42,15 @@ export function SolutionsPage() {
           </p>
           <ul className="page-card-grid">
             {solutionKits.map((kit) => (
-              <li key={kit.name} className="info-card">
-                <img alt="" className="info-card__thumb" decoding="async" loading="lazy" src={brandImagery[kit.image]} />
-                <h3 className="info-card__title">{kit.name}</h3>
+              <li key={kit.name}>
+                <article className="kit-card">
+                  <div className="kit-card__media">
+                    <img alt="" decoding="async" loading="lazy" src={brandImagery[kit.image]} />
+                  </div>
+                  <div className="kit-card__body">
+                    <h3 className="kit-card__title">{kit.name}</h3>
+                  </div>
+                </article>
               </li>
             ))}
           </ul>

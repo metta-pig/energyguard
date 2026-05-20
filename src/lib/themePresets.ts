@@ -59,6 +59,12 @@ export const THEME_PRESET_MANIFEST = [
     summary: "Documentation-forward — cool gray, blue links, restrained chrome.",
     promptHints: ["info", "docs", "knowledge base", "support", "readable", "neutral"],
   },
+  {
+    id: "energyguard",
+    category: "client",
+    summary: "Energy Guard brand — navy header, sky blue links, orange CTAs, fleet-industrial gradient.",
+    promptHints: ["energy guard", "energyguard", "fleet aerodynamics", "trailer"],
+  },
 ] as const;
 
 export type ThemePresetManifestEntry = (typeof THEME_PRESET_MANIFEST)[number];

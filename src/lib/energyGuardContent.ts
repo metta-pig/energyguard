@@ -36,16 +36,49 @@ export const proofLogos = [
   "Made in USA",
 ] as const;
 
+export const audienceSegments = [
+  "Fleet operators",
+  "Owner-operators",
+  "Manufacturers",
+  "Sales partners",
+] as const;
+
+export const fleetMetrics = [
+  {
+    value: "Lifetime",
+    label: "EverGuard™ coverage",
+    detail: "Written warranty for the life of your trailer—industry first.",
+  },
+  {
+    value: "0",
+    label: "Moving parts",
+    detail: "Proven aerodynamics without mechanisms that wear out.",
+  },
+  {
+    value: "USA",
+    label: "Engineered & built",
+    detail: "Designed, manufactured, and supported domestically.",
+  },
+  {
+    value: "EPA",
+    label: "Compliance ready",
+    detail: "Solutions aligned with EPA SmartWay and CARB expectations.",
+  },
+] as const;
+
 export const aboutPillars = [
   {
+    icon: "◆",
     title: "End-to-end solutions",
     body: "Multiple aerodynamic kits designed to match the needs of your fleet—from full systems to targeted upgrades.",
   },
   {
+    icon: "◎",
     title: "Versatile design",
     body: "Adapts to every make and model for trailers of all shapes and sizes with no moving parts and proven performance.",
   },
   {
+    icon: "▲",
     title: "Cost saver",
     body: "Reduce operational costs, achieve fast ROI, and meet EPA/CARB compliance with airflow you can trust.",
   },

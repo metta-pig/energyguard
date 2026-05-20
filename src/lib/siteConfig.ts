@@ -3,7 +3,7 @@
  */
 export const siteConfig = {
   name: "Energy Guard",
-  tagline: "Trailer aerodynamic solutions that cut drag, fuel spend, and downtime.",
+  tagline: "Lower cost per mile with proven trailer aerodynamics—backed by EverGuard™ lifetime coverage.",
   logoUrl: "/brand/logo.webp" as string | null,
 
   storeUrl: null as string | null,

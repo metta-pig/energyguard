@@ -62,7 +62,10 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="site-header__ctas">
-          <a className="ui-button ui-button--secondary site-header__cta" href={siteConfig.contact.emailMailto}>
+          <a
+            className="ui-button ui-button--secondary site-header__cta site-header__cta--email"
+            href={siteConfig.contact.emailMailto}
+          >
             Email sales
           </a>
           <HeaderCta />

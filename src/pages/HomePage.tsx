@@ -2,7 +2,14 @@ import type { ReactNode } from "react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Container, Section } from "../components/ui";
-import { aboutPillars, components, heroSlides, proofLogos, testimonial } from "../lib/energyGuardContent";
+import {
+  aboutPillars,
+  audienceSegments,
+  components,
+  fleetMetrics,
+  proofLogos,
+  testimonial,
+} from "../lib/energyGuardContent";
 import {
   getLayoutPresetId,
   HOME_SECTION_ORDER,
@@ -10,7 +17,7 @@ import {
   type LayoutPresetId,
 } from "../lib/layoutPresets";
 import { siteConfig } from "../lib/siteConfig";
-import { brandImagery, supplementalPhotoCredit } from "../lib/siteMedia";
+import { brandImagery } from "../lib/siteMedia";
 
 const railItems = ["Fuel savings", "EPA / CARB", "Made in USA", "Lifetime warranty", "No moving parts"] as const;
 
@@ -48,49 +55,63 @@ const categoryTiles = [
 
 function getHomeSectionOrder(layoutId: LayoutPresetId): readonly HomeSectionKey[] {
   if (layoutId === "local") {
-    return ["hero", "proof", "visit", "splitIntro", "bento", "quote"];
+    return ["hero", "proof", "stats", "visit", "splitIntro", "bento", "quote"];
   }
   return HOME_SECTION_ORDER[layoutId];
 }
 
 function HomeHero(): ReactNode {
-  const slide = heroSlides[0];
-  const heroImage = brandImagery[slide.image];
-
   return (
-    <header className="hero-cinema">
+    <header className="hero-cinema hero-cinema--fleet">
       <div className="hero-cinema__bg" aria-hidden>
         <img
-          alt="EverGuard trailer aerodynamics lifetime warranty"
+          alt="Aerodynamic semi trailer on the highway"
           className="hero-cinema__photo"
           decoding="async"
           fetchPriority="high"
-          height={900}
+          height={1200}
           loading="eager"
-          src={heroImage}
-          width={1600}
+          src={brandImagery.heroCompliance}
+          width={2000}
         />
         <div className="hero-cinema__scrim" />
         <div className="hero-cinema__vignette" />
       </div>
       <Container className="hero-cinema__content">
-        <p className="hero-cinema__kicker">{slide.kicker}</p>
+        <div className="hero-cinema__badge-row">
+          {siteConfig.logoUrl ? (
+            <span className="hero-cinema__everguard-mark">
+              <img alt="" height={20} src={siteConfig.logoUrl} width={80} />
+              EverGuard™
+            </span>
+          ) : (
+            <p className="hero-cinema__kicker">EverGuard™</p>
+          )}
+          <p className="hero-cinema__kicker">Lifetime warranty</p>
+        </div>
         <h1 className="hero-cinema__title">
-          <span className="hero-cinema__title-line">{slide.title}</span>
+          <span className="hero-cinema__title-line">Aerodynamics that cut drag,</span>
+          <span className="hero-cinema__title-line hero-cinema__title-line--accent">fuel spend, and downtime.</span>
         </h1>
         <p className="hero-cinema__lede">{siteConfig.tagline}</p>
+        <ul className="eg-audience" aria-label="Who we serve">
+          {audienceSegments.map((label) => (
+            <li key={label} className="eg-audience__item">
+              {label}
+            </li>
+          ))}
+        </ul>
         <div className="hero-cinema__actions">
           <Link className="ui-button ui-button--primary" to="/contact">
             Request estimate
           </Link>
-          <a className="ui-button ui-button--secondary" href={siteConfig.contact.emailMailto}>
+          <a className="ui-button ui-button--secondary site-header__cta--email" href={siteConfig.contact.emailMailto}>
             Email sales
           </a>
-          <Link className="ui-button ui-button--ghost" to={slide.ctaHref}>
-            {slide.ctaLabel}
+          <Link className="ui-button ui-button--ghost" to="/warranty">
+            EverGuard warranty
           </Link>
         </div>
-        <p className="hero-cinema__credit">{supplementalPhotoCredit}</p>
       </Container>
       <Container>
         <ul className="show-rail">
@@ -105,6 +126,26 @@ function HomeHero(): ReactNode {
   );
 }
 
+function HomeStats(): ReactNode {
+  return (
+    <Section className="eg-metrics" surface={false}>
+      <Container className="eg-metrics__inner">
+        <p className="eg-metrics__eyebrow">Why fleets switch</p>
+        <h2 className="eg-metrics__title">Built for measurable savings—not marketing fluff.</h2>
+        <ul className="eg-metrics__grid">
+          {fleetMetrics.map((metric) => (
+            <li key={metric.label} className="eg-metrics__card">
+              <p className="eg-metrics__value">{metric.value}</p>
+              <p className="eg-metrics__label">{metric.label}</p>
+              <p className="eg-metrics__detail">{metric.detail}</p>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </Section>
+  );
+}
+
 function HomeSplitIntro(): ReactNode {
   return (
     <Section surface>
@@ -114,17 +155,10 @@ function HomeSplitIntro(): ReactNode {
             <p className="page-eyebrow">About Energy Guard</p>
             <h2 className="page-section-title show-heading">Solutions that fit every need</h2>
             <p className="page-prose">
-              Energy Guard Aerodynamic Solutions are designed to lower your cost per mile and total cost of ownership
-              by maximizing airflow control—while reducing greenhouse gas emissions. No moving parts, proven
-              performance, and kits matched to your operation.
+              Energy Guard Aerodynamic Solutions lower cost per mile and total cost of ownership by maximizing airflow
+              control—while reducing greenhouse gas emissions. No moving parts, proven performance, and kits matched to
+              your operation.
             </p>
-            <ul className="page-list">
-              {aboutPillars.map((pillar) => (
-                <li key={pillar.title}>
-                  <strong>{pillar.title}.</strong> {pillar.body}
-                </li>
-              ))}
-            </ul>
             <div className="page-actions">
               <Link className="ui-button ui-button--primary" to="/solutions">
                 Explore solutions
@@ -146,6 +180,17 @@ function HomeSplitIntro(): ReactNode {
             />
           </figure>
         </div>
+        <ul className="eg-pillar-grid">
+          {aboutPillars.map((pillar) => (
+            <li key={pillar.title} className="eg-pillar">
+              <span className="eg-pillar__icon" aria-hidden>
+                {pillar.icon}
+              </span>
+              <h3 className="eg-pillar__title">{pillar.title}</h3>
+              <p className="eg-pillar__body">{pillar.body}</p>
+            </li>
+          ))}
+        </ul>
       </Container>
     </Section>
   );
@@ -156,10 +201,9 @@ function HomeBento(): ReactNode {
     <Section>
       <Container>
         <p className="page-eyebrow">Explore</p>
-        <h2 className="page-section-title show-heading">Built for drivers, fleets, and partners</h2>
+        <h2 className="page-section-title show-heading">Where do you want to go next?</h2>
         <p className="page-prose show-bento-intro">
-          Route by role—spec kits for operations, register EverGuard coverage, or connect with sales for a custom
-          estimate.
+          Spec kits, register warranty coverage, download the sales sheet, or talk with our team about fleet ROI.
         </p>
         <div className="show-bento">
           {categoryTiles.map((tile) => (
@@ -178,13 +222,15 @@ function HomeBento(): ReactNode {
           ))}
         </div>
         <p className="page-eyebrow page-eyebrow--spaced">Components</p>
-        <ul className="page-list">
-          {components.slice(0, 3).map((c) => (
-            <li key={c.title}>{c.title}</li>
+        <ul className="eg-component-strip" aria-label="Featured components">
+          {components.map((c) => (
+            <li key={c.title} className="eg-component-strip__item">
+              {c.title}
+            </li>
           ))}
         </ul>
-        <Link className="ui-button ui-button--ghost" to="/solutions">
-          All components
+        <Link className="ui-button ui-button--primary" to="/solutions">
+          View all solutions
         </Link>
       </Container>
     </Section>
@@ -193,7 +239,7 @@ function HomeBento(): ReactNode {
 
 function HomeVisit(): ReactNode {
   return (
-    <div className="show-visit" id="visit">
+    <div className="show-visit show-visit--cta" id="visit">
       <div className="show-visit__bg" aria-hidden>
         <img alt="" decoding="async" loading="lazy" src={brandImagery.visitBackdrop} />
       </div>
@@ -203,8 +249,8 @@ function HomeVisit(): ReactNode {
           <p className="page-eyebrow">Get started</p>
           <h2 className="page-section-title">Ready to upgrade your fleet?</h2>
           <p className="page-prose">
-            Already know what you need? Contact sales for product information, fleet programs, or to place an order. Not
-            sure which solution fits? We&apos;ll help you decide.
+            Tell us your trailer mix and lanes—we&apos;ll recommend a kit, estimate payback, and coordinate installation
+            through your sales rep or authorized dealer.
           </p>
           <div className="page-actions">
             <Link className="ui-button ui-button--primary" to="/contact">
@@ -214,7 +260,7 @@ function HomeVisit(): ReactNode {
               {siteConfig.contact.email}
             </a>
             <a className="ui-button ui-button--ghost" href={brandImagery.salesSheet} rel="noopener noreferrer" target="_blank">
-              Download sales sheet
+              Sales sheet (PDF)
             </a>
           </div>
         </Container>
@@ -250,7 +296,7 @@ function HomeQuote(): ReactNode {
 
 function HomeProof(): ReactNode {
   return (
-    <Section className="home-proof">
+    <Section className="home-proof home-proof--elevated">
       <Container>
         <div className="home-proof__logos" aria-label="Partners and certifications">
           {proofLogos.map((name) => (
@@ -261,12 +307,17 @@ function HomeProof(): ReactNode {
         </div>
         <h2 className="page-section-title show-heading">Trusted by fleets and partners</h2>
         <p className="page-prose">
-          Recognized for innovation and environmental performance—transparent testing, US manufacturing, and programs
-          built for truck drivers, manufacturers, and sales teams.
+          Transparent testing, US manufacturing, and programs built for the people who spec, sell, and run trailers
+          every day.
         </p>
-        <Link className="ui-button ui-button--ghost" to="/info">
-          Why Energy Guard
-        </Link>
+        <div className="page-actions">
+          <Link className="ui-button ui-button--secondary" to="/info">
+            Why Energy Guard
+          </Link>
+          <Link className="ui-button ui-button--ghost" to="/solutions">
+            See solutions
+          </Link>
+        </div>
       </Container>
     </Section>
   );
@@ -276,6 +327,8 @@ function renderHomeSection(key: HomeSectionKey): ReactNode {
   switch (key) {
     case "hero":
       return <HomeHero />;
+    case "stats":
+      return <HomeStats />;
     case "splitIntro":
       return <HomeSplitIntro />;
     case "bento":

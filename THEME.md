@@ -4,7 +4,7 @@
 
 | Setting | Value | Rationale |
 |---------|-------|-----------|
-| `VITE_SITE_THEME` | `modern` | Cool neutrals, geometric sans—fits industrial B2B without the template’s dark showcase default. |
+| `VITE_SITE_THEME` | `energyguard` | Brand fork: navy header, sky blue links, orange CTAs (`src/themes/energyguard.css`). Based on legacy palette from energyguard.com. |
 | `VITE_LAYOUT_PRESET` | `local` | Service/geo business flow; home order customized to **hero → proof (trust) → visit (contact) → story → bento → quote**. |
 
 ## Typography

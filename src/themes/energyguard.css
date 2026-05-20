@@ -1,0 +1,165 @@
+/**
+ * Energy Guard brand theme — legacy palette from energyguard.com.
+ */
+.theme-energyguard {
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Barlow", "Space Grotesk", system-ui, sans-serif;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: clamp(1.875rem, 1.35rem + 1.4vw, 2.35rem);
+
+  --leading-tight: 1.15;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.65;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 1px 3px rgb(24 78 119 / 0.08);
+  --shadow-md: 0 16px 40px rgb(24 78 119 / 0.14);
+
+  --eg-navy: #184e77;
+  --eg-sky: #0487d1;
+  --eg-deep: #025092;
+  --eg-orange: #fec525;
+  --eg-green: #cfcd2e;
+  --eg-mist: #f5f7f7;
+
+  --color-bg: var(--eg-mist);
+  --color-surface: #ffffff;
+  --color-text: #0c1f2e;
+  --color-text-muted: #4a6275;
+  --color-border: #c8d6e3;
+  --color-primary: var(--eg-orange);
+  --color-primary-hover: #e5b01f;
+  --color-link: var(--eg-sky);
+  --color-link-hover: var(--eg-deep);
+  --color-focus: var(--eg-sky);
+
+  --color-header-bg: color-mix(in srgb, var(--eg-navy) 96%, transparent);
+  --color-header-bg-scrolled: rgb(24 78 119 / 0.98);
+  --color-header-border: rgb(255 255 255 / 0.1);
+  --color-header-border-accent: linear-gradient(
+    90deg,
+    transparent,
+    var(--eg-orange) 35%,
+    var(--eg-green) 65%,
+    transparent
+  );
+  --color-header-nav: rgb(255 255 255 / 0.78);
+  --color-header-nav-hover: #ffffff;
+  --color-header-nav-active: #ffffff;
+  --color-header-link-hover-bg: rgb(255 255 255 / 0.1);
+  --color-header-link-active-bg: rgb(255 255 255 / 0.14);
+  --color-header-link-active-ring: inset 0 0 0 1px rgb(255 255 255 / 0.22);
+  --color-header-cta-shadow: 0 0 0 1px rgb(254 197 37 / 0.35), 0 12px 32px rgb(0 0 0 / 0.28);
+  --color-header-logo-filter: brightness(0) invert(1);
+  --color-header-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+  --color-header-shadow-raised: 0 16px 40px rgb(0 0 0 / 0.32);
+
+  --color-footer-bg: #0a2d45;
+  --color-footer-border: rgb(255 255 255 / 0.1);
+  --color-footer-accent: linear-gradient(90deg, transparent, var(--eg-orange), var(--eg-green), transparent);
+
+  --rail-bg: linear-gradient(180deg, rgb(10 35 55 / 0.92) 0%, rgb(10 35 55 / 0.55) 100%);
+  --rail-chip-bg: rgb(255 255 255 / 0.08);
+  --rail-chip-border: rgb(255 255 255 / 0.16);
+  --rail-chip-color: #e8f2fa;
+
+  --color-body-ambient: radial-gradient(ellipse 90% 55% at 50% -8%, rgb(4 135 209 / 0.12), transparent 58%);
+
+  --color-page-mast-bg: linear-gradient(145deg, #f5f9fc 0%, #e3f2fb 48%, #eef6fc 100%);
+  --color-page-mast-heading: var(--eg-navy);
+  --color-page-mast-lede: #334e63;
+  --color-page-mast-eyebrow: var(--eg-sky);
+
+  --text-hero: clamp(2.35rem, 1rem + 5.2vw, 4.25rem);
+  --color-hero-ink: rgb(8 28 48 / 0.94);
+  --color-hero-ink-mid: rgb(8 28 48 / 0.55);
+  --color-hero-ink-top: rgb(8 28 48 / 0.15);
+  --color-hero-title-line: #ffffff;
+  --color-hero-lede: rgb(255 255 255 / 0.92);
+  --shadow-show: 0 28px 70px rgb(8 28 48 / 0.35);
+  --glow-ring: 0 0 0 1px color-mix(in srgb, var(--eg-orange) 45%, transparent);
+}
+
+.theme-energyguard .site-header::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--color-header-border-accent);
+  opacity: 0.95;
+}
+
+.theme-energyguard body {
+  background-image: var(--color-body-ambient);
+  background-repeat: no-repeat;
+  background-size: 100% 420px;
+}
+
+.theme-energyguard .ui-button--primary {
+  color: var(--eg-navy);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: var(--color-header-cta-shadow);
+}
+
+.theme-energyguard .ui-button--primary:hover:not(:disabled) {
+  color: var(--eg-navy);
+}
+
+.theme-energyguard .ui-section--surface {
+  background: linear-gradient(
+    180deg,
+    var(--color-surface) 0%,
+    color-mix(in srgb, var(--color-surface) 94%, var(--eg-mist)) 100%
+  );
+}
+
+.theme-energyguard .site-footer__muted,
+.theme-energyguard .site-footer__link,
+.theme-energyguard .site-footer__copy {
+  color: rgb(220 232 242 / 0.82);
+}
+
+.theme-energyguard .site-footer__link:hover,
+.theme-energyguard .site-footer__social a:hover {
+  color: #ffffff;
+}
+
+.theme-energyguard .site-footer__muted a {
+  color: var(--eg-orange);
+}
+
+.theme-energyguard .hero-cinema__kicker {
+  color: var(--eg-orange);
+}
+
+.theme-energyguard .hero-cinema__title-line--accent {
+  background: linear-gradient(102deg, #ffffff 0%, var(--eg-green) 42%, var(--eg-orange) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.theme-energyguard .show-quote__cite {
+  color: var(--eg-sky);
+}
+
+.theme-energyguard .show-split__badge {
+  color: var(--eg-navy);
+  background: linear-gradient(135deg, var(--eg-orange), color-mix(in srgb, var(--eg-green) 70%, var(--eg-orange)));
+}

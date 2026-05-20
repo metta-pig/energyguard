@@ -10,7 +10,8 @@
 .theme-sports,
 .theme-retro,
 .theme-shop,
-.theme-info {
+.theme-info,
+.theme-energyguard {
   --text-hero: clamp(2.5rem, 1.05rem + 5.8vw, 4.85rem);
   --color-hero-ink: rgb(8 12 7 / 0.94);
   --color-hero-ink-mid: rgb(8 12 7 / 0.52);
@@ -83,4 +84,13 @@
   --color-hero-ink-mid: rgb(15 23 42 / 0.44);
   --color-hero-ink-top: rgb(15 23 42 / 0.06);
   --shadow-show: 0 22px 56px rgb(0 0 0 / 0.35);
+}
+
+.theme-energyguard {
+  --text-hero: clamp(2.35rem, 0.95rem + 5.5vw, 4.5rem);
+  --color-hero-ink: rgb(8 28 48 / 0.92);
+  --color-hero-ink-mid: rgb(8 28 48 / 0.5);
+  --color-hero-ink-top: rgb(8 28 48 / 0.08);
+  --shadow-show: 0 32px 80px rgb(8 28 48 / 0.42);
+  --glow-ring: 0 0 0 1px color-mix(in srgb, #fec525 42%, transparent), 0 0 40px rgb(4 135 209 / 0.15);
 }

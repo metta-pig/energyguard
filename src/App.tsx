@@ -12,10 +12,14 @@ import "./components/ui/ui.css";
 import "./pages/sitePages.css";
 import "./pages/homeShowcase.css";
 import "./pages/layoutPresets.css";
+import "./pages/energyGuard.css";
 
 export default function App() {
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       <SiteHeader />
       <main id="main-content">
         <Routes>
