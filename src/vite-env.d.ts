@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_SITE_THEME?: string;
+  readonly VITE_LAYOUT_PRESET?: string;
 }
 
 interface ImportMeta {

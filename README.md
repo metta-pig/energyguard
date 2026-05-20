@@ -11,7 +11,7 @@ This README is the **web** template. Native work uses the same skill **files** (
 
 ## Project — Energy Guard
 
-Marketing site for [Energy Guard™](https://energyguard.com/) trailer aerodynamic solutions. **Theme:** `modern` · **Layout:** `local` (home: hero → trust → contact → story → routes → testimonial).
+Marketing site for [Energy Guard™](https://energyguard.com/) trailer aerodynamic solutions. **Theme:** `energyguard` · **Layout:** `local` (home: hero → trust → metrics → contact → story → routes → testimonial).
 
 Routes: `/`, `/about`, `/solutions`, `/warranty`, `/info`, `/news`, `/contact`.
 
@@ -21,15 +21,26 @@ Routes: `/`, `/about`, `/solutions`, `/warranty`, `/info`, `/news`, `/contact`.
 
 ## Quick start
 
-After you have opened the project folder in Cursor (usually a **client clone** created from this template—see **Using Cursor skills → A**):
-
 ```bash
 npm install
-cp .env.example .env
 npm run dev
 ```
 
-- **Theme + layout:** set `VITE_SITE_THEME` and **`VITE_LAYOUT_PRESET`** (see **`src/lib/themePresets.ts`** and **`src/lib/layoutPresets.ts`**). If omitted, the app defaults to **`showcase`** + **`balanced`**. See `src/themes/README.md`.
+Open http://localhost:5173/
+
+No **`.env`** file is required. This repo ships with **`energyguard`** theme and **`local`** home layout baked in (`src/lib/siteDefaults.ts`). All theme CSS under `src/themes/` is in git—clones get the full palette immediately.
+
+### Optional environment overrides
+
+To try another preset locally, copy **`.env.example`** to **`.env`** and set:
+
+| Variable | Default (no `.env`) | Purpose |
+|----------|---------------------|---------|
+| `VITE_SITE_THEME` | `energyguard` | Theme id → `src/themes/<id>.css` (also `modern`, `classic`, `sports`, … in `src/lib/themePresets.ts`). |
+| `VITE_LAYOUT_PRESET` | `local` | Home section order (`src/lib/layoutPresets.ts`). |
+
+There are no API keys. **Production:** override only if needed; otherwise `npm run build` uses the same defaults.
+
 - **Revamp inputs:** see `revamp-input/README.md` (folder is gitignored except that README).
 
 ## Using Cursor skills

@@ -1,3 +1,5 @@
+import { DEFAULT_LAYOUT_PRESET } from "./siteDefaults";
+
 /**
  * Structural layout presets — control home page **section flow** and **visual weight**
  * (imagery vs copy vs decorative chrome). Pair with `VITE_SITE_THEME` for a unique site.
@@ -187,8 +189,10 @@ export const HOME_SECTION_ORDER: Record<LayoutPresetId, readonly HomeSectionKey[
 };
 
 export function getLayoutPresetId(): LayoutPresetId {
-  const raw = import.meta.env.VITE_LAYOUT_PRESET?.trim() || "balanced";
-  return (LAYOUT_PRESET_IDS as readonly string[]).includes(raw) ? (raw as LayoutPresetId) : "balanced";
+  const raw = import.meta.env.VITE_LAYOUT_PRESET?.trim() || DEFAULT_LAYOUT_PRESET;
+  return (LAYOUT_PRESET_IDS as readonly string[]).includes(raw)
+    ? (raw as LayoutPresetId)
+    : DEFAULT_LAYOUT_PRESET;
 }
 
 export function matchLayoutPresetId(input: string): LayoutPresetId | null {
